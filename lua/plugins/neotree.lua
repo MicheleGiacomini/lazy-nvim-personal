@@ -15,7 +15,7 @@ return {
     {
       "<leader>fE",
       function()
-        require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+        require("neo-tree.command").execute({ position = "float", toggle = true, dir = vim.loop.cwd() })
       end,
       desc = "Explorer NeoTree (cwd)",
     },
@@ -63,6 +63,54 @@ return {
           local path = node:get_id()
           vim.fn.setreg("+", path, "c")
         end,
+        ["<cr>"] = "open",
+        ["<esc>"] = "revert_preview", -- close preview or floating neo-tree window
+        ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
+        ["l"] = "open",
+        ["L"] = "focus_preview",
+        ["s"] = "open_split",
+        ["v"] = "open_vsplit",
+        ["t"] = "open_tabnew",
+        ["w"] = "open_with_window_picker",
+        --["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
+        ["h"] = "close_node",
+        -- ['C'] = 'close_all_subnodes',
+        ["z"] = "close_all_nodes",
+        --["Z"] = "expand_all_nodes",
+        ["a"] = {
+          "add",
+          -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
+          -- some commands may take optional config options, see `:h neo-tree-mappings` for details
+          config = {
+            show_path = "relative", -- "none", "relative", "absolute"
+          },
+        },
+
+        ["A"] = { "add_directory", config = {
+          show_path = "reative",
+        } }, -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
+        ["d"] = "delete",
+        ["r"] = { "rename", config = {
+          show_path = "relative",
+        } },
+        ["y"] = "copy_to_clipboard",
+        ["x"] = "cut_to_clipboard",
+        ["p"] = "paste_from_clipboard",
+        ["c"] = { "copy", config = {
+          show_path = "relative",
+        } }, -- takes text input for destination, also accepts the optional config.show_path option like "add":
+        -- ["c"] = {
+        --  "copy",
+        --  config = {
+        --    show_path = "none" -- "none", "relative", "absolute"
+        --  }
+        --}
+        ["q"] = "close_window",
+        ["R"] = "refresh",
+        ["?"] = "show_help",
+        ["<"] = "prev_source",
+        [">"] = "next_source",
+        ["i"] = "show_file_details",
       },
     },
     default_component_configs = {
