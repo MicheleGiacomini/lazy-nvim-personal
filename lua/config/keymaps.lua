@@ -164,6 +164,9 @@ map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
 map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
+-- Undotree
+map("n", "<leader>U", "<cmd>UndotreeToggle<CR>", { desc = "Undotree toggle", remap = true })
+
 -- windows
 map("n", "<leader>ww", "<C-W>p", { desc = "Other window", remap = true })
 map("n", "<leader>wc", "<C-W>c", { desc = "Close window", remap = true })
