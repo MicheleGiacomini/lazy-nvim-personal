@@ -10,6 +10,7 @@ return {
   config = true,
   debugger = {
     enabled = true,
+    run_via_dap = true,
     register_configurations = function(_)
       local dap = require("dap")
       dap.adapters.dart = {
@@ -22,13 +23,32 @@ return {
         command = "flutter",
         args = { "debug_adapter" },
       }
-      dap.configurations.dart = {}
+      dap.configurations.dart = {
+        {
+          type = "dart",
+          request = "launch",
+          name = "Launch dart",
+          dartSdkPath = "/var/lib/snapd/snap/bin/dart",
+          flutterSdkPath = "/var/lib/snapd/snap/bin/flutter", -- ensure this is correct
+          program = "${workspaceFolder}/lib/main.dart", -- ensure this is correct
+          cwd = "${workspaceFolder}",
+        },
+        {
+          type = "flutter",
+          request = "launch",
+          name = "Launch flutter",
+          dartSdkPath = "/var/lib/snapd/snap/bin/dart",
+          flutterSdkPath = "/var/lib/snapd/snap/bin/flutter", -- ensure this is correct
+          program = "${workspaceFolder}/lib/main.dart", -- ensure this is correct
+          cwd = "${workspaceFolder}",
+        },
+      }
       -- require("dap.ext.vscode").load_launchjs()
     end,
   },
   lsp = {
     color = { -- show the derived colours for dart variables
-      enabled = false, -- whether or not to highlight color variables at all, only supported on flutter >= 2.10
+      enabled = true, -- whether or not to highlight color variables at all, only supported on flutter >= 2.10
       background = false, -- highlight the background
       background_color = nil, -- required, when background is transparent (i.e. background_color = { r = 19, g = 17, b = 24},)
       foreground = false, -- highlight the foreground
