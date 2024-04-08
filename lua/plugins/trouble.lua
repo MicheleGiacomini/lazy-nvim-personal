@@ -4,12 +4,22 @@ return {
   keys = {
     {
       "<leader>xx",
-      "<cmd>Trouble diagnostics toggle<cr>",
+      "<cmd>Trouble diag_side toggle<cr>",
       desc = "Diagnostics (Trouble)",
     },
     {
       "<leader>xX",
-      "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+      "<cmd>Trouble diag_side toggle filter.buf=0<cr>",
+      desc = "Buffer Diagnostics (Trouble)",
+    },
+    {
+      "<leader>xe",
+      "<cmd>Trouble errors toggle<cr>",
+      desc = "Diagnostics (Trouble)",
+    },
+    {
+      "<leader>xE",
+      "<cmd>Trouble errors toggle filter.buf=0<cr>",
       desc = "Buffer Diagnostics (Trouble)",
     },
     {
@@ -33,5 +43,23 @@ return {
       desc = "Quickfix List (Trouble)",
     },
   },
-  opts = {}, -- for default options, refer to the configuration section for custom setup.
+  opts = {
+    modes = {
+      diag_side = {
+        mode = "diagnostics",
+        preview = {
+          type = "split",
+          relative = "win",
+          position = "right",
+          size = 0.3,
+        }
+      },
+      errors = {
+        mode = "diag_side",
+        filter = {
+          severity = vim.diagnostic.severity.ERROR,
+        }
+      }
+    }
+  }, -- for default options, refer to the configuration section for custom setup.
 }
