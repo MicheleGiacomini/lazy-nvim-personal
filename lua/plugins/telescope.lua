@@ -7,6 +7,7 @@ return {
       ["<C-j>"] = actions.move_selection_next,
       ["<C-l>"] = actions.preview_scrolling_down,
       ["<C-h>"] = actions.preview_scrolling_up,
+      ["<C-/>"] = actions.which_key,
     })
   end,
 }
