@@ -5,6 +5,8 @@ return {
   { "rose-pine/neovim" },
   { "folke/tokyonight.nvim" },
   { "scottmckendry/cyberdream.nvim", },
+  { "eldritch-theme/eldritch.nvim" },
+  { "catppuccin/nvim" },
 
   -- Configure LazyVim to load gruvbox
   {
